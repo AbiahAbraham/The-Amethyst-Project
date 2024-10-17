@@ -13,6 +13,35 @@
             width: 80%; /* Adjust this value to increase or decrease width */
             margin: 0 auto; /* Centers the container on the page */
         }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px; /* Adjust to add space between the logo and the cards */
+        }
+        
+        .amethyst-logo {
+            width: 150px; /* Adjust the size as needed */
+            height: auto;
+            mix-blend-mode: multiply; /* Blend the image with the background */
+            opacity: 0.8; /* Optional: Make the image semi-transparent */
+        }
+        
+        .amethyst-logo:hover + h1 {
+            color: #a020f0; /* Change color on logo hover */
+            font-family: "Tan new york";
+        }
+        
+        h1 {
+            animation: colorChange 4s infinite; /* Add color change animation */
+        }
+        
+        @keyframes colorChange {
+            0% { color: #a020f0; }  /* Start with amethyst purple */
+            25% { color: #FF7F50; } /* Coral */
+            50% { color: #FFD700; } /* Gold */
+            75% { color: #40E0D0; } /* Turquoise */
+            100% { color: #a020f0; } /* Back to amethyst purple */
+        }
+        
         
         .card, .team-updates {
             height: 300px; /* Set a fixed height for all cards */
@@ -49,6 +78,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
         }
+        .card img {
+            width: 100px; /* Adjust the size of the logo */
+            height: auto;
+            mix-blend-mode: multiply; /* Blend the image with the background */
+            opacity: 0.8; /* Optional: Make the image semi-transparent */
+        }
+        
 
         .purple-card {
             background-color: #d8baf7;
@@ -77,8 +113,9 @@
         }
 
         .card ul {
-            list-style-type: disc; /* Use bullets */
+            list-style-type: circle; /* Use bullets */
             padding-left: 20px;    /* Space for bullets */
+            
         }
         
         .card ul li {
@@ -118,5 +155,43 @@
             left: 10px;
             width: 20px;
         }
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em; /* Adjust as needed */
+            padding: 0;
+        }
+        
+        .icon-btn:hover {
+            color: red; /* Change icon color on hover */
+        }
+        .task-list {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .completed .task-name {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        
+        .delete-task-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: red;
+        }
+        
+        
 
     
