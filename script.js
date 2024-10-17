@@ -1,55 +1,43 @@
-// Add JavaScript code for your web site here and call it from index.html.
-document.addEventListener("DOMContentLoaded", function () {
-    // Initialize task lists storage
-    let taskLists = {};
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all the plus icons
+    const plusIcons = document.querySelectorAll('.plus-icon');
+    
+    // Add click event listener to each plus icon
+    plusIcons.forEach((plusIcon) => {
+        plusIcon.addEventListener('click', () => {
+            const card = plusIcon.closest('.card'); // Get the card where the plus icon was clicked
+            const ul = card.querySelector('ul');    // Get the ul element in that card
 
-    // Add event listeners to all plus icons (these should be inside each card)
-    document.querySelectorAll('.plus-icon').forEach(function (plusIcon) {
-        plusIcon.addEventListener('click', function () {
-            let card = plusIcon.closest('.card');
-            let taskInput = card.querySelector('.task-input');
-            if (taskInput.value.trim()) {
-                let listName = card.getAttribute('data-list-name');
-                if (!listName) {
-                    listName = 'List-' + Math.random().toString(36).substr(2, 9);
-                    card.setAttribute('data-list-name', listName);
-                    taskLists[listName] = [];
-                }
-                addTask(listName, taskInput.value, card);
-                taskInput.value = ''; // Clear the input field
+            // Prompt the user for the task text
+            const taskText = prompt('Enter the new task:');
+            
+            if (taskText) {
+                // Create a new list item for the task
+                const newLi = document.createElement('li');
+                newLi.innerHTML = `
+                    <span>${taskText}</span> 
+                    <button class="icon-btn"><span class="icon">🗑️</span></button>
+                `;
+
+                // Append the new task to the ul
+                ul.appendChild(newLi);
+
+                // Add functionality to the new trash icon to delete the task
+                const trashIcon = newLi.querySelector('.icon-btn');
+                trashIcon.addEventListener('click', () => {
+                    newLi.remove(); // Remove the list item when trash icon is clicked
+                });
             }
         });
     });
 
-    // Function to add a task to a specific card/list
-    function addTask(listName, taskName, card) {
-        let taskId = `task-${listName}-${taskLists[listName].length}`;
-        taskLists[listName].push({ id: taskId, name: taskName, completed: false }); // Add task to internal data structure
+    // Add event listener to existing trash icons for initial tasks
+    const trashIcons = document.querySelectorAll('.icon-btn');
 
-        // Create task item and add to the card
-        let taskItem = document.createElement('li');
-        taskItem.className = 'task-item';
-        taskItem.id = taskId;
-        taskItem.innerHTML = `
-            <span class="task-name">${taskName}</span>
-            <button class="delete-task-btn">🗑️</button>
-        `;
-
-        // Append task to the task list area in the card
-        let taskListElement = card.querySelector('.task-list-items');
-        taskListElement.appendChild(taskItem);
-
-        // Add event listener for the delete task button (trash icon)
-        taskItem.querySelector('.delete-task-btn').addEventListener('click', function () {
-            deleteTask(listName, taskId, taskItem);
+    trashIcons.forEach((trashIcon) => {
+        trashIcon.addEventListener('click', (event) => {
+            const li = event.target.closest('li'); // Find the closest li to the trash icon clicked
+            li.remove(); // Remove the list item
         });
-    }
-
-    // Function to delete a task
-    function deleteTask(listName, taskId, taskItem) {
-        taskItem.remove(); // Remove task from the DOM
-
-        // Remove task from the internal taskLists data structure
-        taskLists[listName] = taskLists[listName].filter(task => task.id !== taskId);
-    }
+    });
 });
