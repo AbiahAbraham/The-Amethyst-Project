@@ -1,0 +1,16 @@
+{
+    "tasks": [
+        {
+            "list_name": "Purple List",
+            "task_description": "Sample Task 1"
+        },
+        {
+            "list_name": "Gold List",
+            "task_description": "Sample Task 2"
+        },
+        {
+            "list_name": "Orange List",
+            "task_description": "Sample Task 3"
+        }
+    ]
+}
